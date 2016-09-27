@@ -1,23 +1,23 @@
 /*******************************************************************************
 *******************************************************************************/
-#include "ppm.h"
+#include "pwm.h"
 
-#define PPM_MIN         800
-#define PPM_LOW         1000
-#define PPM_LOW_THRESH  1450
-#define PPM_MID         1500
-#define PPM_HIGH_THRESH 1550
-#define PPM_HIGH        2000
-#define PPM_MAX         2200
+#define PWM_MIN         800
+#define PWM_LOW         1000
+#define PWM_LOW_THRESH  1450
+#define PWM_MID         1500
+#define PWM_HIGH_THRESH 1550
+#define PWM_HIGH        2000
+#define PWM_MAX         2200
 
-bool PPM::init = false;
-bool PPM::pin_enabled[NUM_PINS];
-bool PPM::pin_state[NUM_PINS];
-unsigned long PPM::start_time[NUM_PINS];
-unsigned int PPM::pin_micros[NUM_PINS];
-Servo PPM::servo[NUM_PINS];
+bool PWM::init = false;
+bool PWM::pin_enabled[NUM_PINS];
+bool PWM::pin_state[NUM_PINS];
+unsigned long PWM::start_time[NUM_PINS];
+unsigned int PWM::pin_micros[NUM_PINS];
+Servo PWM::servo[NUM_PINS];
 
-PPM::PPM (Pin pin, int io) : pin(pin)
+PWM::PWM (Pin pin, int io) : pin(pin)
 {
   if (!init)
   {
@@ -50,7 +50,7 @@ PPM::PPM (Pin pin, int io) : pin(pin)
   }
 }
 
-bool PPM::Pin_Test (Pin pin)
+bool PWM::Pin_Test (Pin pin)
 {
   if (pin_enabled[pin])
   {
@@ -81,7 +81,7 @@ ISR (PCINT0_vect) // handle pin change interrupt for D8 to D13 here
 {
   for (int i = 8; i <= 13; i++)
   {
-    if (PPM::Pin_Test(i))
+    if (PWM::Pin_Test(i))
     {
       break;
     }
@@ -92,7 +92,7 @@ ISR (PCINT1_vect) // handle pin change interrupt for A0 to A5 here
 {
   for (int i = A0; i <= A5; i++)
   {
-    if (PPM::Pin_Test(i))
+    if (PWM::Pin_Test(i))
     {
       break;
     }
@@ -103,7 +103,7 @@ ISR (PCINT2_vect) // handle pin change interrupt for D0 to D7 here
 {
   for (int i = 0; i <= 7; i++)
   {
-    if (PPM::Pin_Test(i))
+    if (PWM::Pin_Test(i))
     {
       break;
     }
@@ -111,41 +111,41 @@ ISR (PCINT2_vect) // handle pin change interrupt for D0 to D7 here
 }
 
 // Returns -100 to 100
-int PPM::Read (Pin pin)
+int PWM::Read (Pin pin)
 {
-  if (pin_micros[pin] < PPM_MIN || pin_micros[pin] > PPM_MAX)
+  if (pin_micros[pin] < PWM_MIN || pin_micros[pin] > PWM_MAX)
   {
     return 0;
   }
-  else if (pin_micros[pin] <= PPM_LOW)
+  else if (pin_micros[pin] <= PWM_LOW)
   {
     return -500;
   }
-  else if (pin_micros[pin] >= PPM_HIGH)
+  else if (pin_micros[pin] >= PWM_HIGH)
   {
     return 500;
   }
 
-  return pin_micros[pin] - PPM_MID;
+  return pin_micros[pin] - PWM_MID;
 }
 
 // Returns -100 to 100
-int PPM::Read ()
+int PWM::Read ()
 {
   return Read(pin);
 }
 
 // Expects value between -100 and 100
-void PPM::Write (Pin pin, int value)
+void PWM::Write (Pin pin, int value)
 {
   if (value >= -500 && value <= 500)
   {
-    servo[pin].write(PPM_MID + value);
+    servo[pin].write(PWM_MID + value);
   }
 }
 
 // Expects value between -100 and 100
-void PPM::Write (int value)
+void PWM::Write (int value)
 {
   return Write(pin, value);
 }
