@@ -110,7 +110,7 @@ ISR (PCINT2_vect) // handle pin change interrupt for D0 to D7 here
   }
 }
 
-// Returns -100 to 100
+// Returns -500 to 500
 int PWM::Read (Pin pin)
 {
   if (pin_micros[pin] < PWM_MIN || pin_micros[pin] > PWM_MAX)
@@ -129,13 +129,13 @@ int PWM::Read (Pin pin)
   return pin_micros[pin] - PWM_MID;
 }
 
-// Returns -100 to 100
+// Returns -500 to 500
 int PWM::Read ()
 {
   return Read(pin);
 }
 
-// Expects value between -100 and 100
+// Expects value between -500 and 500
 void PWM::Write (Pin pin, int value)
 {
   if (value >= -500 && value <= 500)
@@ -144,7 +144,7 @@ void PWM::Write (Pin pin, int value)
   }
 }
 
-// Expects value between -100 and 100
+// Expects value between -500 and 500
 void PWM::Write (int value)
 {
   return Write(pin, value);
