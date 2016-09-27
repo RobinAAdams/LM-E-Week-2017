@@ -4,7 +4,7 @@
 #define RECEIVER_H
 
 #include "pins.h"
-#include "ppm.h"
+#include "pwm.h"
 
 class Receiver
 {
@@ -17,7 +17,7 @@ protected:
 private:
   static Receiver receiver_singleton;
   static Pin channel_map[NUM_CHANNELS];
-  static PPM *ppm_map[NUM_CHANNELS];
+  static PWM *pwm_map[NUM_CHANNELS];
 
   Receiver();
 };
