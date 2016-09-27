@@ -1,11 +1,11 @@
 /*******************************************************************************
 *******************************************************************************/
 #include "receiver.h"
-#include "ppm.h"
+#include "pwm.h"
 
 Receiver Receiver::receiver_singleton;
 Pin Receiver::channel_map[8];
-PPM *Receiver::ppm_map[8];
+PWM *Receiver::pwm_map[8];
 
 Receiver::Receiver ()
 {    
@@ -20,12 +20,12 @@ Receiver::Receiver ()
 
   for (int i = 0; i < 8; i++)
   {
-    ppm_map[i] = new PPM(channel_map[i], INPUT);
+    pwm_map[i] = new PWM(channel_map[i], INPUT);
   }
 }
 
 unsigned int Receiver::Read (Channel channel)
 {
-  return ppm_map[channel]->Read();
+  return pwm_map[channel]->Read();
 }
 
