@@ -1,15 +1,15 @@
 /*******************************************************************************
 *******************************************************************************/
-#ifndef PPM_H
-#define PPM_H
+#ifndef PWM_H
+#define PWM_H
 
 #include <Arduino.h>
 #include <Servo.h>
 
-class PPM
+class PWM
 {
 public:
-  PPM (Pin pin, int io);
+  PWM (Pin pin, int io);
 
   // Returns -500 to 500
   static int Read (Pin pin);
@@ -33,4 +33,4 @@ private:
   Pin pin;
 };
 
-#endif /* PPM_H */
+#endif /* PWM_H */
