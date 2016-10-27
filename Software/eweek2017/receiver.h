@@ -11,7 +11,7 @@ class Receiver
 public:
   static const int NUM_CHANNELS = 8;
 
-  static unsigned int Read (Channel channel);
+  static int Read (Channel channel);
 
 protected:
 private:

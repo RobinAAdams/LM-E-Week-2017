@@ -24,7 +24,7 @@ Receiver::Receiver ()
   }
 }
 
-unsigned int Receiver::Read (Channel channel)
+int Receiver::Read (Channel channel)
 {
   return pwm_map[channel]->Read();
 }

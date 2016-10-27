@@ -5,13 +5,16 @@
 #include "drive.h"
 
 // Global variables
-Drive *drive = new Arcade_Drive(CHANNEL_2, CHANNEL_3);
+Drive *drive = NULL;
 unsigned long start_time;
 unsigned long curr_time;
 
 // Code in this section only runs once
 void setup ()
 {
+  Printer::Init();
+  drive = new Arcade_Drive(CHANNEL_3, CHANNEL_1);
+  
   start_time = micros();
 }
 

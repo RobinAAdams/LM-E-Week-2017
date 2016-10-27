@@ -16,7 +16,7 @@
  **********************************/
 
 // Comment out to disable prints
-#define DEBUG_OUTPUT
+#define DEBUG_PRINT
 
 // This is the speed of data over your serial terminal (default = 9600)
 #define BAUD_RATE 9600
@@ -28,6 +28,8 @@
 class Printer
 {
 public:
+  static void Init ();
+
   static void _Print (String str);
   static String _Scan (unsigned int max_bytes);
   

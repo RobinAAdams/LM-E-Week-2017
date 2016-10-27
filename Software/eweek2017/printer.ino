@@ -14,6 +14,13 @@ String blank_string = "";
 Printer::Printer ()
 {
 #ifdef DEBUG_PRINT
+  //Serial.begin(BAUD_RATE);
+#endif /* DEBUG_PRINT */
+}
+
+void Printer::Init ()
+{
+#ifdef DEBUG_PRINT
   Serial.begin(BAUD_RATE);
 #endif /* DEBUG_PRINT */
 }
